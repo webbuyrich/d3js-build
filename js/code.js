@@ -72,6 +72,12 @@ d3.selectAll('tbody tr').selectAll('td')
 	.style('color', '#ffffff')
 	.style('background-color', function (d, i){
 		return i%2 ? '#2980b9' : '#2c3e50';
-	})
+	});
+
+
+/** Manipulate content using D3 */
+
+// add new column to table
+var newCol = d3.selectAll('tr').append('td');
 
 
