@@ -80,4 +80,12 @@ d3.selectAll('tbody tr').selectAll('td')
 // add new column to table
 var newCol = d3.selectAll('tr').append('td');
 
+// add text to newCol
+newCol.text('a')
+
+// add new text using array
+newCol.text(function (d, i) {
+	return ['Six', 'y', 'h', 'n'][i]
+})
+
 
