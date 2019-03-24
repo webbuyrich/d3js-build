@@ -1,5 +1,5 @@
 var width = 900,
-	height= 300,
+	height= 400,
 	// define padding from the edge
 	pad = 20,
 	// define padding for the labels
