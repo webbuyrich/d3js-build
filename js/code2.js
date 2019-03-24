@@ -14,14 +14,19 @@ var thead = table.append('thead'),
 // Load data and assign it to the Data variable
 var reload = function () {
 	d3.csv('data/villians.csv', function (data){
-		Data = data;
+		
+	Data = data.filter( function (d) { 
+				return d['Doctor actor'] == 'Matt Smith';
+			});
 		redraw();
 	});
+
 };
 reload();
 
 // Draw the table
 var redraw = function (){
+
 	// select all table rows and join data
 	var tr = tbody.selectAll('tr')
 		.data(Data);
@@ -40,6 +45,7 @@ var redraw = function (){
 		.append('td')
 		.text(function (d) { return d });
 
+	// sort data
 	tbody.selectAll('tr')
 		.sort(function (a,b){
 			return d3.ascending(
