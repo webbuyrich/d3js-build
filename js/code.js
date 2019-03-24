@@ -86,6 +86,9 @@ newCol.text('a')
 // add new text using array
 newCol.text(function (d, i) {
 	return ['Six', 'y', 'h', 'n'][i]
-})
+});
+
+//remove data
+d3.selectAll('tr')[0][3].remove();
 
 
