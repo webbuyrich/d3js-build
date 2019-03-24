@@ -39,4 +39,12 @@ var redraw = function (){
 		.enter()
 		.append('td')
 		.text(function (d) { return d });
+
+	tbody.selectAll('tr')
+		.sort(function (a,b){
+			return d3.ascending(
+				a['Year first'],
+				b['Year first']
+			);
+		});
 };
