@@ -59,4 +59,19 @@ d3.json('data/histogram-hours.json', function(data){
 
 });
 
+/** style DOM elements using D3 **/
+
+// style td elements
+d3.selectAll('td').style('color', '#2980b9');
+
+// bold table head
+d3.selectAll('thead').selectAll('td').style('font-weight', 'bold');
+
+// stye body cells in 2nd and 4th column
+d3.selectAll('tbody tr').selectAll('td')
+	.style('color', '#ffffff')
+	.style('background-color', function (d, i){
+		return i%2 ? '#2980b9' : '#2c3e50';
+	})
+
 
