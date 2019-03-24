@@ -16,7 +16,7 @@ var reload = function () {
 	d3.csv('data/villians.csv', function (data){
 		
 	Data = data.filter( function (d) { 
-				return d['Doctor actor'] == 'Matt Smith';
+				return d['Doctor actor'] != 'Matt Smith';
 			});
 		redraw();
 	});
@@ -49,8 +49,8 @@ var redraw = function (){
 	tbody.selectAll('tr')
 		.sort(function (a,b){
 			return d3.ascending(
-				a['Year first'],
-				b['Year first']
+				a['Doc. no.'],
+				b['Doc. no.']
 			);
 		});
 };
