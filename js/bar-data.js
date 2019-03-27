@@ -19,8 +19,8 @@ var xScale = d3.scale.ordinal()
 
 // use d3 color scheme
 var colors = d3.scale.linear()
-	.domain([0, bardata.length])
-	.range(['#2980b9', '#9b59b6']);
+	.domain([0, bardata.length * .33, bardata.length * .66, bardata.length])
+	.range(['#fff','#1abc9c', '#2980b9', '#9b59b6', '#3498db']);
 
 console.log(colors);
 // start d3 canvas
