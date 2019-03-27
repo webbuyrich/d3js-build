@@ -1,4 +1,7 @@
-var bardata = [12, 60, 85, 15,23, 65, 70, 10, 19, 30, 80];
+var bardata = [];
+for (i=0; i<50; i++){
+	bardata.push(Math.random() * 6);
+}
 var height = 400,
 	width = 900,
 	barWidth = 100,
@@ -15,8 +18,9 @@ var xScale = d3.scale.ordinal()
 	.rangeBands([0, width], .1, .2);
 
 // use d3 color scheme
-var colors = d3.scale.category20c()
-	.domain([0, bardata.length]);
+var colors = d3.scale.linear()
+	.domain([0, bardata.length])
+	.range(['#2980b9', '#9b59b6']);
 
 console.log(colors);
 // start d3 canvas
@@ -34,7 +38,7 @@ d3.select('#graph')
 	.data(bardata)
 	// start bars
 	.enter().append('rect')
-		.style('fill', function(d){return colors(d)})
+		.style('fill', function(d, i){return colors(i)})
 		.attr({
 			width: function(d) { return xScale.rangeBand()  } ,			
 			height: function(d){ return yScale(d) } ,
