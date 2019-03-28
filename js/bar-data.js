@@ -25,46 +25,51 @@ var colors = d3.scale.linear()
 
 
 // start d3 canvas
-d3.select('#graph')
-	.append('svg')
-	.attr({
-		'width': width,
-		'height': height,
-
-	})
-	.style('background', '#2c3e50')
-// start graph
-.selectAll('rect')
-	//get data
-	.data(bardata)
-	// start bars
-	.enter().append('rect')
-		.style('fill', function(d, i){return colors(i)})
+var myChart = 
+	d3.select('#graph')
+		.append('svg')
 		.attr({
-			width: function(d) { return xScale.rangeBand()  } ,			
-			height: function(d){ return yScale(d) } ,
-			// return bar depending on data values
-			x: function(d, i){ return xScale(d)},
-			y: function(d) { return height - yScale(d) },
-		})
+			'width': width,
+			'height': height,
 
-	// add opacity on mouseover
-	.on('mouseover', function(d){
-		tempColor = this.style.fill;
-		d3.select(this)
-			.transition()
-			.delay(100)
-			.duration(1000)
-			.style({
-				'fill': '#e67e22'
+		})
+		.style('background', '#2c3e50')
+	// start graph
+	.selectAll('rect')
+		//get data
+		.data(bardata)
+		// start bars
+		.enter().append('rect')
+			.style('fill', function(d, i){return colors(i)})
+			.attr({
+				width: function(d) { return xScale.rangeBand()  } ,			
+				'height': 0 ,
+				// return bar depending on data values
+				x: function(d, i){ return xScale(d)},
+				'y': height
 			})
-	})	
-	// remove opacity on mouseout
-	.on('mouseout', function(d){
-		d3.select(this)
-			.transition()
-			.style({
-				'fill': tempColor
-			})
-	})	
-;
+
+		// add opacity on mouseover
+		.on('mouseover', function(d){
+			tempColor = this.style.fill;
+			d3.select(this)
+				.style({
+					'fill': '#e67e22'
+				})
+		})	
+		// remove opacity on mouseout
+		.on('mouseout', function(d){
+			d3.select(this)
+				.style({
+					'fill': tempColor
+				})
+		});
+
+myChart.transition()
+	.attr({
+		height: function(d){ return yScale(d) } ,
+		y: function(d) { return height - yScale(d) },
+	})
+	.delay(function(d,i){
+		return i * 50;
+	})
