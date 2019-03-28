@@ -2,8 +2,10 @@
 d3.json('data/forecast.json', function(d){
 
 	var temperatures = [],
-		height = 400,
-		width = 900;
+		// add values for margin
+		margin = { top: 0, right: 0, bottom: 30, left: 30}
+		height = 400 - margin.top - margin.bottom,
+		width = 600 - margin.left - margin.right;
 		
 	// no value variables
 	var tempColor,
@@ -39,7 +41,7 @@ d3.json('data/forecast.json', function(d){
 		.ticks(10)
 		// define which side to display
 		.orient('left');
-
+		console.log("all the points", yAxisTicks.scale().ticks(yAxisTicks.ticks()[0]));
 	// use ordinal scale
 	xScale = d3.scale.ordinal()
 		.domain(temperatures)
@@ -67,12 +69,15 @@ d3.json('data/forecast.json', function(d){
 		d3.select('#graph')
 			.append('svg')
 			.attr({
-				'width': width,
-				'height': height,
+				// add width and height to respective margins
+				'width': width + margin.left + margin.right,
+				'height': height + margin.top + margin.bottom,
 
 			})
 			// start to group the elements
-			.append('g')			
+			.append('g')
+			// move object according to margin
+			.attr('transform', 'translate('+ margin.left +',' + margin.right + ')')		
 			// start graph
 			.selectAll('rect')
 				//get data
@@ -120,7 +125,7 @@ d3.json('data/forecast.json', function(d){
 
 	// create the y ticks 
 	yGuide = d3.select('#graph svg').append('g')
-			.attr('transform', 'translate(20,0)')
+			.attr('transform', 'translate(30,0)')
 			.call(yAxisTicks)
 
 	myChart.transition()
