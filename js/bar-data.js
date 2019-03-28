@@ -8,6 +8,8 @@ var height = 400,
 	barOffset = 5,
 	tempColor;
 
+
+
 // use linear scale
 var yScale = d3.scale.linear()
 	.domain([0, d3.max(bardata)])
@@ -22,6 +24,17 @@ var xScale = d3.scale.ordinal()
 var colors = d3.scale.linear()
 	.domain([0, bardata.length * .33, bardata.length * .66, bardata.length])
 	.range(['#fff','#1abc9c', '#2980b9', '#9b59b6', '#3498db']);
+
+
+// create a tooltip
+var tooltip = d3.select('body')
+				.append('div')
+				.style({
+					'position':'absolute',
+					'padding': '0 10px',
+					'background': '#fff',
+					'opacity': '0.5'
+				})
 
 
 // start d3 canvas
@@ -51,6 +64,16 @@ var myChart =
 
 		// add opacity on mouseover
 		.on('mouseover', function(d){
+			// tooltip transition
+			tooltip.transition().duration(200)
+				.style('opacity', 0.9)
+
+			// add tooltip 
+			tooltip.html(d)
+				.style({
+					'left': (d3.event.pageX - 35) + 'px',
+					'top': (d3.event.pageY - 130) + 'px'
+				})
 			tempColor = this.style.fill;
 			d3.select(this)
 				.style({
@@ -73,4 +96,5 @@ myChart.transition()
 	.delay(function(d,i){
 		return i * 50;
 	})
-	.duration(2000)
+	.duration(1000)
+
