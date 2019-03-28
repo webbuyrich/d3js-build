@@ -3,9 +3,7 @@ d3.json('data/forecast.json', function(d){
 
 	var temperatures = [],
 		height = 400,
-		width = 900,
-		barWidth = 100,
-		barOffset = 5;
+		width = 900;
 		
 	// no value variables
 	var tempColor,
@@ -57,7 +55,7 @@ d3.json('data/forecast.json', function(d){
 				'height': height,
 
 			})
-			.style('background', '#2c3e50')
+			
 		// start graph
 		.selectAll('rect')
 			//get data
@@ -80,10 +78,12 @@ d3.json('data/forecast.json', function(d){
 					.style('opacity', 0.9)
 
 				// add tooltip 
-				tooltip.html(d)
+				tooltip.html(
+					'<div style="font-size: 2rem; font-weight:bold">'+ d + '&deg;</div>'
+				)
 					.style({
 						'left': (d3.event.pageX - 35) + 'px',
-						'top': (d3.event.pageY - 130) + 'px'
+						'top': (d3.event.pageY - 30) + 'px'
 					})
 				tempColor = this.style.fill;
 				d3.select(this)
@@ -93,6 +93,7 @@ d3.json('data/forecast.json', function(d){
 			})	
 			// remove opacity on mouseout
 			.on('mouseout', function(d){
+				tooltip.html('')
 				d3.select(this)
 					.style({
 						'fill': tempColor
