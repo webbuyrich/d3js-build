@@ -33,8 +33,8 @@ d3.json('data/forecast.json', function(d){
 
 	// use d3 color scheme
 	colors = d3.scale.linear()
-		.domain([0, temperatures.length * .33, temperatures.length * .66, temperatures.length])
-		.range(['#fff','#1abc9c', '#2980b9', '#9b59b6', '#3498db']);
+		.domain([0,  65, 75, d3.max(temperatures)])
+		.range(['#fff','#2980b9','#f39c12', '#e74c3c']);
 
 
 	// create a tooltip
@@ -64,7 +64,7 @@ d3.json('data/forecast.json', function(d){
 			.data(temperatures)
 			// start bars
 			.enter().append('rect')
-				.style('fill', function(d, i){return colors(i)})
+				.style('fill', colors)
 				.attr({
 					width: function(d) { return xScale.rangeBand()  } ,			
 					'height': 0 ,
