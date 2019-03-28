@@ -73,3 +73,4 @@ myChart.transition()
 	.delay(function(d,i){
 		return i * 50;
 	})
+	.duration(2000)
