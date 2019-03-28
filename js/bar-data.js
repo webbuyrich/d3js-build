@@ -5,7 +5,8 @@ for (i=0; i<100; i++){
 var height = 400,
 	width = 900,
 	barWidth = 100,
-	barOffset = 5;
+	barOffset = 5,
+	tempColor;
 
 // use linear scale
 var yScale = d3.scale.linear()
@@ -49,12 +50,17 @@ d3.select('#graph')
 
 	// add opacity on mouseover
 	.on('mouseover', function(d){
+		tempColor = this.style.fill;
 		d3.select(this)
-			.style('opacity', 0.5)
+			.style({
+				'fill': '#e67e22'
+			})
 	})	
 	// remove opacity on mouseout
 	.on('mouseout', function(d){
 		d3.select(this)
-			.style('opacity', 1)
+			.style({
+				'fill': tempColor
+			})
 	})	
 ;
