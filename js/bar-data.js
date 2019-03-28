@@ -52,7 +52,9 @@ d3.select('#graph')
 	.on('mouseover', function(d){
 		tempColor = this.style.fill;
 		d3.select(this)
-			.transition(1000)
+			.transition()
+			.delay(100)
+			.duration(1000)
 			.style({
 				'fill': '#e67e22'
 			})
@@ -60,7 +62,7 @@ d3.select('#graph')
 	// remove opacity on mouseout
 	.on('mouseout', function(d){
 		d3.select(this)
-			.transition(1000)
+			.transition()
 			.style({
 				'fill': tempColor
 			})
